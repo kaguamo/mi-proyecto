@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNI-CICLA</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Segoe UI',Arial,sans-serif;
+background:#f4f6f9;
+color:#333;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:#1b5e20;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+color:white;
+font-size:1.8rem;
+font-weight:bold;
+}
+
+nav{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:600;
+}
+
+.dropdown{
+position:relative;
+display:inline-block;
+}
+
+.dropdown-content{
+display:none;
+position:absolute;
+background:white;
+min-width:220px;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+z-index:999;
+}
+
+.dropdown:hover .dropdown-content{
+display:block;
+}
+
+.dropdown-content button{
+width:100%;
+padding:15px;
+border:none;
+background:white;
+cursor:pointer;
+text-align:left;
+font-size:15px;
+}
+
+.dropdown-content button:hover{
+background:#f0f0f0;
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:80px 40px;
+background:url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b')
+center/cover no-repeat;
+min-height:90vh;
+position:relative;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.55);
+}
+
+.hero .texto,
+.hero .cubo{
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-size:3.3rem;
+color:white;
+line-height:1.3;
+}
+
+.hero h1 span{
+color:#7CFF8F;
+}
+
+.hero p{
+margin-top:20px;
+font-size:1.2rem;
+color:white;
+max-width:600px;
+}
+
+.cubo img{
+width:220px;
+animation:girar 6s linear infinite;
+}
+
+@keyframes girar{
+from{transform:rotateY(0deg);}
+to{transform:rotateY(360deg);}
+}
+
+section{
+padding:70px 30px;
+}
+
+h2{
+text-align:center;
+color:#1b5e20;
+margin-bottom:40px;
+font-size:2.2rem;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.card{
+background:white;
+width:250px;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+margin:10px 0;
+}
+
+.producto{
+display:flex;
+justify-content:space-around;
+align-items:center;
+flex-wrap:wrap;
+gap:30px;
+}
+
+.info{
+flex:1;
+min-width:300px;
+}
+
+.info ul{
+margin-top:15px;
+padding-left:20px;
+}
+
+.info li{
+margin-bottom:10px;
+}
+
+.imagen img{
+width:220px;
+}
+
+.datos{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.dato{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+min-width:180px;
+}
+
+.dato h3{
+font-size:2rem;
+color:#43a047;
+}
+
+.pasos{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.pasos div{
+text-align:center;
+}
+
+.pasos i{
+font-size:2.5rem;
+color:#43a047;
+margin-bottom:10px;
+}
+
+.ubicacion{
+background:#e8f5e9;
+text-align:center;
+padding:70px 20px;
+}
+
+.mapa{
+display:flex;
+justify-content:center;
+margin:30px 0;
+}
+
+.mapa iframe{
+width:900px;
+max-width:95%;
+height:500px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.btn{
+display:inline-block;
+background:#43a047;
+color:white;
+padding:12px 25px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.btn:hover{
+background:#1b5e20;
+}
+
+/* PANTALLA COMPLETA CON FONDO */
+
+.pantalla-info{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09')
+center center/cover no-repeat;
+
+z-index:99999;
+overflow-y:auto;
+padding:50px;
+}
+
+.pantalla-info::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.65);
+}
+
+.contenido-info{
+position:relative;
+z-index:2;
+max-width:900px;
+margin:auto;
+text-align:center;
+color:white;
+padding-top:80px;
+}
+
+.contenido-info h1{
+font-size:3rem;
+color:#7CFF8F;
+margin-bottom:30px;
+}
+
+.contenido-info p{
+font-size:1.3rem;
+line-height:1.8;
+}
+
+.cerrar-pantalla{
+position:absolute;
+top:20px;
+right:30px;
+font-size:35px;
+background:none;
+border:none;
+color:white;
+cursor:pointer;
+z-index:3;
+}
+
+footer{
+background:#1b5e20;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">♻ UNI-CICLA</div>
+
+<nav>
+
+<div class="dropdown">
+
+<a href="#">Inicio</a>
+
+<div class="dropdown-content">
+
+<button onclick="mostrarInfo('quienes')">
+¿Quiénes Somos?
+</button>
+
+<button onclick="mostrarInfo('mision')">
+Misión
+</button>
+
+<button onclick="mostrarInfo('vision')">
+Visión
+</button>
+
+<button onclick="mostrarInfo('contacto')">
+Contacto
+</button>
+
+</div>
+
+</div>
+
+<a href="#funciona">Proceso</a>
+<a href="#producto">Productos</a>
+<a href="#ubicacion">Ubicación</a>
+<a href="#impacto">Impacto</a>
+<a href="#contacto">Contacto</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+<div class="texto">
+<h1>
+Del unicel que contamina,<br>
+al impermeabilizante
+<span>que transforma.</span>
+</h1>
+
+<p>
+Recolectamos unicel y lo transformamos en una solución útil para reducir residuos y fomentar el reciclaje.
+</p>
+
+</div>
+
+<div class="cubo">
+<img src="https://cdn-icons-png.flaticon.com/512/679/679720.png">
+</div>
+
+</section>
+
+<section id="funciona">
+
+<h2>¿Cómo funciona?</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>1. Recolección</h3>
+<img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b">
+<p>Se recolecta el unicel de centros de acopio.</p>
+</div>
+
+<div class="card">
+<h3>2. Limpieza</h3>
+<img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
+<p>El material se limpia para retirar residuos.</p>
+</div>
+
+<div class="card">
+<h3>3. Triturado</h3>
+<img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492">
+<p>Se reduce a pequeñas partículas.</p>
+</div>
+
+<div class="card">
+<h3>4. Procesamiento</h3>
+<img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f">
+<p>Se transforma para crear un recubrimiento protector.</p>
+</div>
+
+<div class="card">
+<h3>5. Producto Final</h3>
+<img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd">
+<p>Impermeabilizante elaborado con material reciclado.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="producto" class="producto">
+
+<div class="info">
+
+<h2>¿Qué es nuestro impermeabilizante?</h2>
+
+<p>
+Producto elaborado a partir de materiales reciclados que ayudan a reducir el impacto ambiental.
+</p>
+
+<ul>
+<li>✔ Reutilización de residuos.</li>
+<li>✔ Menor contaminación.</li>
+<li>✔ Economía circular.</li>
+<li>✔ Mayor aprovechamiento del unicel.</li>
+</ul>
+
+</div>
+
+<div class="imagen">
+<img src="https://cdn-icons-png.flaticon.com/512/2933/2933245.png">
+</div>
+
+</section>
+
+<section id="impacto">
+
+<h2>Impacto que generamos</h2>
+
+<div class="datos">
+
+<div class="dato">
+<h3>1250+</h3>
+<p>kg recuperados</p>
+</div>
+
+<div class="dato">
+<h3>500+</h3>
+<p>m² protegidos</p>
+</div>
+
+<div class="dato">
+<h3>200+</h3>
+<p>participantes</p>
+</div>
+
+<div class="dato">
+<h3>80%</h3>
+<p>menos residuos</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="ubicacion" class="ubicacion">
+
+<h2>Ubicación</h2>
+
+<p>
+Encuéntranos y conoce nuestro proyecto de reciclaje de unicel.
+</p>
+
+<div class="mapa">
+
+<iframe
+src="https://www.google.com/maps/embed?pb=!3m2!1ses-419!2smx!4v1781902729504!5m2!1ses-419!2smx!6m8!1m7!1sxuXBQpziEyRoK2SZes4mrg!2m2!1d19.97242782136708!2d-99.6005486860053!3f62.05579645741089!4f3.947900325682923!5f0.7820865974627469"
+style="border:0;"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
+</div>
+
+</section>
+
+<section id="contacto" class="ubicacion">
+
+<h2>Contacto</h2>
+
+<p>
+Déjanos tus datos y te responderemos lo antes posible.
+</p>
+
+<div style="display:flex;justify-content:center;">
+
+<form action="http://localhost:3000/guardar" method="POST"
+style="background:white;padding:25px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.1);width:100%;max-width:500px;text-align:left;">
+
+<label>Nombre:</label>
+<input type="text" name="nombre" placeholder="Escribe tu nombre" required
+style="width:100%;padding:10px;margin:8px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+<label>Correo:</label>
+<input type="email" name="correo" placeholder="Escribe tu correo" required
+style="width:100%;padding:10px;margin:8px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+<label>Mensaje:</label>
+<textarea name="mensaje" rows="5" required
+style="width:100%;padding:10px;margin:8px 0 15px;border:1px solid #ccc;border-radius:8px;"></textarea>
+
+<div style="display:flex;gap:10px;">
+
+<button type="submit"
+class="btn"
+style="flex:1;border:none;cursor:pointer;">
+Enviar mensaje
+</button>
+
+<button type="reset"
+style="flex:1;background:#d32f2f;color:white;padding:12px;border:none;border-radius:30px;cursor:pointer;font-weight:bold;">
+Cancelar datos
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+<section class="final">
+
+<h2>Tú puedes ser parte del cambio</h2>
+
+<div class="pasos">
+
+<div>
+<i class="fas fa-box"></i>
+<p>Separa tu unicel</p>
+</div>
+
+<div>
+<i class="fas fa-recycle"></i>
+<p>Entrégalo</p>
+</div>
+
+<div>
+<i class="fas fa-paint-roller"></i>
+<p>Lo transformamos</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- PANTALLA COMPLETA CON FONDO -->
+
+<div id="pantallaInfo" class="pantalla-info">
+
+<button class="cerrar-pantalla" onclick="cerrarInfo()">
+✖
+</button>
+
+<div class="contenido-info">
+
+<h1 id="tituloInfo"></h1>
+
+<p id="textoInfo"></p>
+
+</div>
+
+</div>
+
+<footer>
+♻ UNI-CICLA © 2026 | Reciclando hoy para un mejor mañana.
+</footer>
+
+<script>
+
+function mostrarInfo(tipo){
+
+let titulo = "";
+let texto = "";
+
+if(tipo === "quienes"){
+
+titulo = "¿Quiénes Somos?";
+
+texto = "Somos estudiantes comprometidos con el cuidado del medio ambiente mediante la recolección y transformación del unicel. Nuestro proyecto busca reducir la contaminación y fomentar una cultura de reciclaje responsable, demostrando que los residuos pueden convertirse en productos útiles para la sociedad.";
+
+}
+
+if(tipo === "mision"){
+
+titulo = "Misión";
+
+texto = "Promover el reciclaje del unicel mediante procesos innovadores que permitan reutilizar este material en la elaboración de impermeabilizantes y otros productos sustentables, contribuyendo al cuidado del medio ambiente y a la reducción de residuos.";
+
+}
+
+if(tipo === "vision"){
+
+titulo = "Visión";
+
+texto = "Ser un proyecto líder en el aprovechamiento de residuos reciclables, impulsando una sociedad más consciente y comprometida con la sostenibilidad, donde el reciclaje forme parte de la vida cotidiana de las personas.";
+
+}
+
+if(tipo === "contacto"){
+
+titulo = "Contacto";
+
+texto = "Puedes comunicarte con UNI-CICLA a través de nuestras redes sociales, correo electrónico o WhatsApp para conocer más sobre nuestras actividades, campañas de recolección y proyectos ambientales.";
+
+}
+
+document.getElementById("tituloInfo").textContent = titulo;
+document.getElementById("textoInfo").textContent = texto;
+
+document.getElementById("pantallaInfo").style.display = "block";
+
+document.body.style.overflow = "hidden";
+
+}
+
+function cerrarInfo(){
+
+document.getElementById("pantallaInfo").style.display = "none";
+
+document.body.style.overflow = "auto";
+
+}
+
+document.querySelector("form").addEventListener("submit", function(){
+
+alert("Datos enviados correctamente. Gracias por contactarnos.");
+
+});
+
+</script>
+
+</body>
+</html>

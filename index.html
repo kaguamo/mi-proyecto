@@ -363,6 +363,158 @@
             margin-top:20px;
         }
 
+        /* Reinicio básico */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Contenedor principal */
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Imágenes */
+img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Menú */
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    flex-wrap: wrap;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+/* Secciones */
+section{
+    padding: 50px 0;
+}
+
+/* Tarjetas */
+.cards{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card{
+    flex: 1;
+    min-width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Formularios */
+form{
+    width: 100%;
+}
+
+input,
+textarea,
+select,
+button{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+button{
+    cursor: pointer;
+}
+
+/* Pie de página */
+footer{
+    text-align: center;
+    padding: 20px;
+}
+
+/* ======== RESPONSIVE ======== */
+
+@media (max-width:768px){
+
+    nav{
+        flex-direction: column;
+    }
+
+    nav ul{
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .cards{
+        flex-direction: column;
+    }
+
+    .card{
+        width: 100%;
+    }
+
+    h1{
+        font-size: 30px;
+    }
+
+    h2{
+        font-size: 24px;
+    }
+
+    p{
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width:480px){
+
+    .container{
+        width:95%;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    h2{
+        font-size:20px;
+    }
+
+    p{
+        font-size:15px;
+    }
+
+    button{
+        font-size:16px;
+    }
+
+}
+
     </style>
 
 </head>
@@ -408,6 +560,9 @@
     </nav>
 
 </header>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <section class="hero">
 
